@@ -3,7 +3,7 @@ const sizes = document.getElementById('sizes');
 const generateBtn = document.getElementById('generateBtn');
 const downloadBtn = document.getElementById('downloadBtn');
 const qrContainer = document.querySelector('.qr-body');
-const imgSrc = 'https://example.com/path/to/qrcode.png';
+
 
 
 let size = sizes.value;
@@ -18,38 +18,28 @@ sizes.addEventListener('change', (e) => {
   isEmptyInput();
 });
 
-document.getElementById('downloadBtn').addEventListener('click', function() {
-    const img = document.querySelector('.qr-body img');
+downloadBtn.addEventListener('click', ()=>{
+    let img = document.querySelector('.qr-body img');
 
-    if (img !== null) {
-        const imgSrc = img.getAttribute('src');
-
-        // Create a temporary anchor element
-        const downloadLink = document.createElement('a');
-        downloadLink.href = imgSrc;
-        downloadLink.download = 'QR_Code.png'; // Set the filename for the downloaded image
-        downloadLink.style.display = 'none'; // Hide the anchor element
-
-        // Append the anchor element to the body
-        document.body.appendChild(downloadLink);
-
-        // Simulate a click event on the anchor element
-        downloadLink.click();
-
-        // Remove the anchor element from the DOM
-        document.body.removeChild(downloadLink);
+    if(img !==null){
+        let imgAtrr = img.getAttribute('src');
+        downloadBtn.setAttribute("href", imgAtrr);
     }
-});
+    else{
+        downloadBtn.setAttribute("href", `${document.querySelector
+            ('canvas').toDataURL()}`);
+    }
 
+})
 
 
 
 function isEmptyInput() {
-  if (qrText.value.length > 0) {
-    generateQRCode();
-  } else {
-    alert("Enter the text or URL to generate");
-  }
+//   if (qrText.value.length > 0) {
+//     generateQRCode();
+//   } else {
+//     alert("Enter the text or URL to generate");
+//   }
 }
 
 function generateQRCode() {
