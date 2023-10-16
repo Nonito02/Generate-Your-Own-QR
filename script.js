@@ -18,19 +18,22 @@ sizes.addEventListener('change', (e) => {
   isEmptyInput();
 });
 
-downloadBtn.addEventListener('click', ()=>{
-    let img = document.querySelector('.qr-body img');
+downloadBtn.addEventListener('click', () => {
+    let qrImage = document.querySelector('.qr-body img');
 
-    if(img !==null){
-        let imgAtrr = img.getAttribute('src');
-        downloadBtn.setAttribute("href", imgAtrr);
+    if (qrImage !== null) {
+        let imgSrc = qrImage.src;
+        downloadBtn.href = imgSrc;
+    } else {
+        let qrCanvas = document.querySelector('canvas');
+        if (qrCanvas !== null) {
+            let imgDataUrl = qrCanvas.toDataURL("image/png");
+            downloadBtn.href = imgDataUrl;
+        } else {
+            alert("No QR code to download.");
+        }
     }
-    else{
-        downloadBtn.setAttribute("href", `${document.querySelector
-            ('canvas').toDataURL()}`);
-    }
-
-})
+});
 
 
 
