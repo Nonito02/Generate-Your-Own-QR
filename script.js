@@ -38,12 +38,7 @@ downloadBtn.addEventListener('click', () => {
 
 
 function isEmptyInput() {
-//   if (qrText.value.length > 0) {
-//     generateQRCode();
-//   } else {
-//     alert("Enter the text or URL to generate");
-//   }
-}
+  if (qrText.value.length > 0) {    generateQRCode();  } else {    alert("Enter the text or URL to generate"); } }
 
 function generateQRCode() {
   qrContainer.innerHTML = "";
