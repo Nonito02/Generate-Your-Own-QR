@@ -47,20 +47,11 @@ function generateQRCode() {
 }
 
 function downloadQRCode(imgSrc) {
-  // Create a blob from the image source
-  fetch(imgSrc)
-    .then((response) => response.blob())
-    .then((blob) => {
-      const blobUrl = URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = blobUrl;
-      link.download = 'qrcode.png';
-      link.click();
-
-      alert('QR code downloaded successfully!');
-    })
-    .catch((error) => {
-      console.error("Error while creating blob:", error);
-      alert('Failed to download QR code.');
-    });
+  const link = document.createElement('a');
+  link.href = imgSrc;
+  link.download = 'qrcode.png';
+  link.click();
+  
+  // Alert the user after the download
+  alert('QR code downloaded successfully!');
 }
