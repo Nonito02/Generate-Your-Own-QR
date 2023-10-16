@@ -20,24 +20,25 @@ sizes.addEventListener('change', (e) => {
 
 downloadBtn.addEventListener('click', () => {
     const img = document.querySelector('.qr-body img');
-
     if (img !== null) {
         const imgSrc = img.getAttribute('src');
-
-        // Create an anchor element for downloading the image
-        const downloadLink = document.createElement('a');
-        downloadLink.href = imgSrc;
-        downloadLink.download = 'qrcode.png'; // Set the filename for the downloaded image
-        downloadLink.click();
+        const link = document.createElement('a');
+        link.href = imgSrc;
+        link.download = 'qrcode.png';
+        link.target = '_blank'; // Add this line for mobile compatibility
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
     } else {
         const canvas = document.querySelector('canvas');
         const canvasDataUrl = canvas.toDataURL("image/png");
-
-        // Create an anchor element for downloading the image
-        const downloadLink = document.createElement('a');
-        downloadLink.href = canvasDataUrl;
-        downloadLink.download = 'qrcode.png'; // Set the filename for the downloaded image
-        downloadLink.click();
+        const link = document.createElement('a');
+        link.href = canvasDataUrl;
+        link.download = 'qrcode.png';
+        link.target = '_blank'; // Add this line for mobile compatibility
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
     }
 });
 
