@@ -46,12 +46,19 @@ function generateQRCode() {
   });
 }
 
-function downloadQRCode(imgSrc) {
-  const link = document.createElement('a');
-  link.href = imgSrc;
-  link.download = 'qrcode.png';
-  link.click();
-  
-  // Alert the user after the download
-  alert('QR code downloaded successfully!');
-}
+
+
+
+downloadBtn.addEventListener('click', ()=>{
+    let img = document.querySelector('.qr-body img');
+
+    if(img !== null){
+        let imgAtrr = img.getAttribute('src');
+        downloadBtn.setAttribute("href", imgAtrr);
+    }
+    else{
+        downloadBtn.setAttribute("href", `${document.querySelector('canvas').toDataURL()}`);
+    }
+
+    alert('QR code downloaded successfully!');
+});
