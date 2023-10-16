@@ -3,6 +3,8 @@ const sizes = document.getElementById('sizes');
 const generateBtn = document.getElementById('generateBtn');
 const downloadBtn = document.getElementById('downloadBtn');
 const qrContainer = document.querySelector('.qr-body');
+const imgSrc = 'https://example.com/path/to/qrcode.png';
+
 
 let size = sizes.value;
 
@@ -17,15 +19,20 @@ sizes.addEventListener('change', (e) => {
 });
 
 downloadBtn.addEventListener('click', () => {
-  const qrCodeImage = document.querySelector('.qr-body img');
-  
-  if (qrCodeImage) {
-    const imgSrc = qrCodeImage.getAttribute('src');
-    downloadQRCode(imgSrc);
-  } else {
-    alert("QR code image not found.");
-  }
+    const img = document.querySelector('.qr-body img');
+
+    if (img !== null) {
+        const imgSrc = img.getAttribute('src');
+        downloadBtn.setAttribute("href", imgSrc);
+        downloadBtn.setAttribute("download", "qrcode.png"); // Set a filename for the downloaded image
+    } else {
+        const canvas = document.querySelector('canvas');
+        const canvasDataUrl = canvas.toDataURL("image/png");
+        downloadBtn.setAttribute("href", canvasDataUrl);
+        downloadBtn.setAttribute("download", "qrcode.png"); // Set a filename for the downloaded image
+    }
 });
+
 
 function isEmptyInput() {
   if (qrText.value.length > 0) {
@@ -45,20 +52,3 @@ function generateQRCode() {
     colorDark: "#000",
   });
 }
-
-
-
-
-downloadBtn.addEventListener('click', ()=>{
-    let img = document.querySelector('.qr-body img');
-
-    if(img !== null){
-        let imgAtrr = img.getAttribute('src');
-        downloadBtn.setAttribute("href", imgAtrr);
-    }
-    else{
-        downloadBtn.setAttribute("href", `${document.querySelector('canvas').toDataURL()}`);
-    }
-
-    alert('QR code downloaded successfully!');
-});
