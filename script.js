@@ -23,15 +23,24 @@ downloadBtn.addEventListener('click', () => {
 
     if (img !== null) {
         const imgSrc = img.getAttribute('src');
-        downloadBtn.setAttribute("href", imgSrc);
-        downloadBtn.setAttribute("download", "qrcode.png"); // Set a filename for the downloaded image
+
+        // Create an anchor element for downloading the image
+        const downloadLink = document.createElement('a');
+        downloadLink.href = imgSrc;
+        downloadLink.download = 'qrcode.png'; // Set the filename for the downloaded image
+        downloadLink.click();
     } else {
         const canvas = document.querySelector('canvas');
         const canvasDataUrl = canvas.toDataURL("image/png");
-        downloadBtn.setAttribute("href", canvasDataUrl);
-        downloadBtn.setAttribute("download", "qrcode.png"); // Set a filename for the downloaded image
+
+        // Create an anchor element for downloading the image
+        const downloadLink = document.createElement('a');
+        downloadLink.href = canvasDataUrl;
+        downloadLink.download = 'qrcode.png'; // Set the filename for the downloaded image
+        downloadLink.click();
     }
 });
+
 
 
 function isEmptyInput() {
